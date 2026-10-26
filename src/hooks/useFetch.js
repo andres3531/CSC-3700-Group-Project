@@ -33,8 +33,8 @@ function useFetch(url) {
                     setIsPending(false)
                 })
 
-        },2000, [url])
-    }) //WE CAN REMOVE TIMEOUT AFTER WE ARE DONE ITS FOR TESTING NOW
+        },2000)
+    }, [url]) //WE CAN REMOVE TIMEOUT AFTER WE ARE DONE ITS FOR TESTING NOW
 
     return { data, isPending, error }
 }
