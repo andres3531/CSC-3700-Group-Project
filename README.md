@@ -1,8 +1,8 @@
-Aurora CS Course Scheduler
-CSC 3700 — Advanced Web Application Development | Milestone 1
-Authors: Andres Alvarado and Jacob Chilelli
-Aurora University — Fall 2026
-Overview
+Aurora CS Course Scheduler\
+CSC 3700 — Advanced Web Application Development | Milestone 1\
+Authors: Andres Alvarado and Jacob Chilelli\
+Aurora University — Fall 2026\
+Overview\
 A React application that displays the Aurora CS Developer Track course catalog and helps students track completed courses and identify which courses they can take next based on prerequisites.
 --------------------------------------------------------------------------------------------------------------------------
   Setup and running the project
