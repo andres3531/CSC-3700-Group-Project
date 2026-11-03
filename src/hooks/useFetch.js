@@ -10,13 +10,10 @@ function useFetch(url) {
 
 
     useEffect(() => {
-        setTimeout(() =>{
             fetch(url)
                 .then(resp => {
-                    // Check HTTP status — 404 and 500 do not throw automatically
-                    // resp.ok is true for 200-299 status codes
                     if (!resp.ok) {
-                        console.log(`Bad response : ${resp.status}`) //webserver throws this error the http protocol
+                        console.log(`Bad response : ${resp.status}`)
                         throw new Error(`HTTP error: ${resp.status}`)
                     }
                     return resp.json()
@@ -28,13 +25,10 @@ function useFetch(url) {
                 })
                 .catch(err => {
                     console.log(`CATCH HAPPENED response : ${err.message}`)
-                    // .catch() handles both network errors and the thrown HTTP errors
                     setError(err.message)
                     setIsPending(false)
                 })
-
-        },2000)
-    }, [url]) //WE CAN REMOVE TIMEOUT AFTER WE ARE DONE ITS FOR TESTING NOW
+    }, [url])
 
     return { data, isPending, error }
 }

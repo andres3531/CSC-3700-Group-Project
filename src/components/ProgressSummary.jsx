@@ -1,7 +1,6 @@
 function ProgressSummary({courses, completed, availableCount, lockedCount}) {
 
     const theProgress = courses.length > 0 ? (completed.length / courses.length) * 100 : 0
-    //the reason I added a ternary operator here is because we don't want to try to divide by 0 before data gets here
 
     return (
         <>
