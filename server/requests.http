@@ -1,0 +1,10 @@
+@baseUrl = http://localhost:3000/api
+
+### 1. GET all course -- expect 200
+GET {{baseUrl}}/courses
+
+### 2. GET one course by id -- expect 200
+GET {{baseUrl}}/courses/11
+
+### delete
+DELETE {{baseUrl}}/courses/1
