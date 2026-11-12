@@ -54,7 +54,7 @@ function CourseCard({course, completed, toggleCourse, isAvailable, allCourses}) 
                             id={course.id}
                             checked={completed.includes(Number(course.id))}
                             onChange={() => toggleCourse(Number(course.id))}
-                            disabled={!isAvailable(course)}
+                            disabled={!isAvailable(course) && !completed.includes(Number(course.id))}
                         />
 
                         <label className="form-check-label" htmlFor={course.id}>
