@@ -5,18 +5,9 @@ async function getCoursesWithPrereqs(pool, id) {
     } else {
         [courses] = await pool.query('SELECT * FROM courses WHERE id = ?', [id])
     }
+    const [prereqs] = await pool.query('SELECT course_id, prereq_id FROM prerequisites')
 
-    const [prereqs] = await pool.query(
-        'SELECT course_id, prereq_id FROM prerequisites'
-    )
-
-    const result = courses.map(course => ({
-        ...course,
-        prerequisites: prereqs
-            .filter(p => p.course_id === course.id)
-            .map(p => p.prereq_id)
-    }))
-
+    const result = courses.map(course => ({...course, prerequisites: prereqs.filter(p => p.course_id === course.id).map(p => p.prereq_id)}))
     if (id === undefined) return result
     return result.length > 0 ? result[0] : null
 }

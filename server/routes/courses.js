@@ -5,7 +5,6 @@ const pool = require('../util/database')
 const { getCoursesWithPrereqs } = require('../util/courseData')
 const validateCourse = require('../util/validateCourse')
 
-//saying when someone sends a GET request to /courses/:id run this function
 router.get('/courses/:id', async (req, res) => {
     try {
         const course = await getCoursesWithPrereqs(pool, req.params.id)
@@ -20,11 +19,10 @@ router.get('/courses/:id', async (req, res) => {
     }
 })
 
-//saying when someone sends a GET request to /courses run this function
 router.get('/courses', async (req, res) => {
     try {
-        const courses = await getCoursesWithPrereqs(pool) //retrieves the courses and their prerequisite arrays from MySQL.
-        res.json(courses) //sends the resulting array back to whoever made the request.
+        const courses = await getCoursesWithPrereqs(pool)
+        res.json(courses)
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
@@ -34,7 +32,7 @@ router.get('/courses', async (req, res) => {
 router.post('/courses', async (req, res) => {
     try {
         const error = validateCourse(req.body || {})
-        //just validating information here
+
         if (error) {
             return res.status(400).json({ error: error })
         }
@@ -42,7 +40,7 @@ router.post('/courses', async (req, res) => {
         const { number, title, credits, description, prerequisites = [] } = req.body
 
         const [result] = await pool.query(
-            'INSERT INTO courses (number, title, credits, description) VALUES (?, ?, ?, ?)', //? is a SQL placeholder for our variables
+            'INSERT INTO courses (number, title, credits, description) VALUES (?, ?, ?, ?)',
             [number, title, credits, description ?? null]
         )
 
@@ -76,7 +74,7 @@ router.put('/courses/:id', async (req, res) => {
         const { number, title, credits, description, prerequisites = [] } = req.body
 
         const [result] = await pool.query(
-            'UPDATE courses SET number = ?, title = ?, credits = ?, description = ? WHERE id = ?', //? is saying only the course whose ID matches the URL
+            'UPDATE courses SET number = ?, title = ?, credits = ?, description = ? WHERE id = ?',
             [number, title, credits, description ?? null, req.params.id]
         )
 

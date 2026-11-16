@@ -3,20 +3,16 @@
 ### 1. GET all courses — expect 200 OK
 GET {{baseUrl}}/courses
 
-
-### 2. GET one existing course — expect 200 OK
+### 2. GET course 2 — expect 200 OK
 GET {{baseUrl}}/courses/2
 
+### 3. GET nonexistent course — expect 404 Not Found
+GET {{baseUrl}}/courses/999999
 
-### 3. GET a nonexistent course — expect 404 Not Found
-GET {{baseUrl}}/courses/999
-
-
-### 4. GET user 1's completed courses — expect 200 OK
+### 4. GET sample user's completions — expect 200 OK
 GET {{baseUrl}}/completions
 
-
-### 5. POST invalid course — expect 400 Bad Request
+### 5. POST invalid course (missing title) — expect 400 Bad Request
 POST {{baseUrl}}/courses
 Content-Type: application/json
 
@@ -27,8 +23,7 @@ Content-Type: application/json
   "prerequisites": []
 }
 
-
-### 6. POST valid course — expect 201 Created
+### 6. POST new temporary course — expect 201 Created
 POST {{baseUrl}}/courses
 Content-Type: application/json
 
@@ -36,37 +31,55 @@ Content-Type: application/json
   "number": "CSC4600",
   "title": "Cloud Computing",
   "credits": 3,
-  "description": "Test course",
+  "description": "Temporary test course",
   "prerequisites": [5, 9]
 }
 
+> {%
+    client.global.set("createdCourseId", response.body.id); //this lets us get the new courses ID so we can use it later
+%}
 
-### 7.  DELETE
-DELETE {{baseUrl}}/courses/13
+### 7. PUT update the temporary course — expect 200 OK
+PUT {{baseUrl}}/courses/{{createdCourseId}}
+Content-Type: application/json
 
+{
+  "number": "CSC4600",
+  "title": "Cloud Computing Updated",
+  "credits": 4,
+  "description": "Updated temporary test course",
+  "prerequisites": [3, 5]
+}
 
-### 8. PUT valid completions — expect 200 OK
+### 8. GET updated temporary course — expect 200 OK
+GET {{baseUrl}}/courses/{{createdCourseId}}
+
+### 9. DELETE the temporary course — expect 200 OK
+DELETE {{baseUrl}}/courses/{{createdCourseId}}
+
+### 10. GET the deleted course — expect 404 Not Found
+GET {{baseUrl}}/courses/{{createdCourseId}}
+
+### 11. PUT valid completions — expect 200 OK
 PUT {{baseUrl}}/completions
 Content-Type: application/json
 
 [1, 3, 7]
 
-
-### 9. PUT invalid completions — expect 400 Bad Request
-# Course 2 requires course 1, which is missing
+### 12. PUT invalid completions (missing prerequisite) — expect 400 Bad Request
 PUT {{baseUrl}}/completions
 Content-Type: application/json
 
 [2]
 
-
-### 10. GET completions after invalid PUT — expect 200 OK
-# Verify the invalid request did not change saved data
+### 13. GET completions after invalid PUT — expect 200 and still [1, 3, 7]
 GET {{baseUrl}}/completions
 
-
-### Restore original sample completions — expect 200 OK
+### 14. Restore original sample completions — expect 200 OK
 PUT {{baseUrl}}/completions
 Content-Type: application/json
 
 [1, 3]
+
+### 15. Verify sample completions restored — expect 200 and [1, 3]
+GET {{baseUrl}}/completions

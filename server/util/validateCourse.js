@@ -1,4 +1,3 @@
-//just checking if everything is valid input
 function validateCourse(course) {
     if (!course.number || !course.title || course.credits === undefined || course.credits === null) {
         return "Number, title, and credits are required"

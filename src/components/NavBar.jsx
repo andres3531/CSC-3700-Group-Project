@@ -15,7 +15,6 @@ function NavBar() {
                 <div className='collapse navbar-collapse' id='navbarNav'>
                     <ul className='navbar-nav ms-auto'>
                         <li className='nav-item'>
-                            {/* end prop — without it / matches all routes so Home is always active */}
                             <NavLink className='nav-link' to='/' end>
                                 Home
                             </NavLink>
