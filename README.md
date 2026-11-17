@@ -1,9 +1,9 @@
-Aurora CS Course Scheduler 
-CSC 3700 — Advanced Web Application Development — Milestone 2
-Authors: Andres Alvarado and Jacob Chilelli
-Aurora University — Fall 2026
-Overview:
-This course scheduler displays the Aurora CS Developer Track and helps a student track completed courses and prerequisites. Milestone 2 replaces the Milestone 1 JSON Server and browser localStorage with a Node.js/Express REST API backed by MySQL.
+Aurora CS Course Scheduler\
+CSC 3700 — Advanced Web Application Development — Milestone 2\
+Authors: Andres Alvarado and Jacob Chilelli\
+Aurora University — Fall 2026\
+Overview:\
+This course scheduler displays the Aurora CS Developer Track and helps a student track completed courses and prerequisites.\Milestone 2 replaces the Milestone 1 JSON Server and browser localStorage with a Node.js/Express REST API backed by MySQL.
 
   Setup from a fresh clone
 1. Clone the Milestone 2 branch
